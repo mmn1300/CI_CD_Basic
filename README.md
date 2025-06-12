@@ -13,9 +13,9 @@
 
 ### AWS EC2 - Amazon Linux 환경에서의 CI/CD 구축
 
-## t2.micro 인스턴스를 사용하며 원활한 실습을 위해 스왑 설정을 함
+#### t2.micro 인스턴스를 사용하며 원활한 실습을 위해 스왑 설정을 함
 
-## EC2 인스턴스 사용자 데이터는 userdata.txt 파일 참고
+#### EC2 인스턴스 사용자 데이터는 userdata.txt 파일 참고
 
 ---
 

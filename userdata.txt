@@ -3,8 +3,8 @@
 # 관리자 권한 부여
 sudo -s
 
-# 스왑 설정 (1기가 확보 -> 권한 부여 -> 스왑 생성 및 실행)
-sudo fallocate -l 1G /swapfile
+# 스왑 설정 (2기가 확보 -> 권한 부여 -> 스왑 생성 및 실행)
+sudo fallocate -l 2G /swapfile
 sudo chmod 600 /swapfile
 sudo mkswap /swapfile
 sudo swapon /swapfile
@@ -16,7 +16,12 @@ sudo dnf install java-17-amazon-corretto -y
 sudo dnf install java-17-amazon-corretto-devel -y
 sudo dnf install git -y
 
+# 깃허브에서 코드 다운로드
+cd /home/ec2-user/
+git clone https://github.com/mmn1300/CI_CD_Basic.git
+
 # 자바 환경변수 설정
+cd /home/ec2-user/AWS_Practice
 export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
 export PATH=$JAVA_HOME/bin:$PATH
 echo 'export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64' >> ~/.bashrc
@@ -31,3 +36,6 @@ sudo usermod -aG docker ec2-user
 sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 sudo chmod +x /usr/local/bin/docker-compose
 newgrp docker
+
+# Gradle 권한 부여
+chmod +x ./gradlew

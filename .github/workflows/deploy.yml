@@ -10,5 +10,37 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Github Actions 테스트하기
-              run: echo "Github Actions 테스트"
+            - name: EC2 인스턴스가 실행 중인지 확인
+              run: |
+                  ping -c 1 ${{ secrets.EC2_HOST }} > /dev/null 2>&1 || {
+                    echo "EC2 인스턴스가 실행 중이 아닙니다. 배포를 중단합니다."
+                    exit 0
+                  }
+
+            - name: EC2 인스턴스에 원격 접속 후 새 서버로 교체
+              uses: appleboy/ssh-action@v1.0.3
+              env:
+                APPLICATION_PROPERTIES: ${{ secrets.APPLICATION_PROPERTIES }}
+                APPLICATION_PROPERTIES_PROV: ${{ secrets.APPLICATION_PROPERTIES_PROV }}
+                APPLICATION_PROPERTIES_TEST: ${{ secrets.APPLICATION_PROPERTIES_TEST }}
+                DOCKER_COMPOSE: ${{ secrets.DOCKER_COMPOSE }}
+              with:
+                host: ${{ secrets.EC2_HOST }}
+                username: ${{ secrets.EC2_USER }}
+                key: ${{ secrets.EC2_KEY }}
+                envs: APPLICATION_PROPERTIES, APPLICATION_PROPERTIES_PROV, APPLICATION_PROPERTIES_TEST, DOCKER_COMPOSE
+                script_stop: true
+                script: |
+                    cd /home/ec2-user/CI_CD_Basic
+                    rm -rf docker-compose.yml
+                    rm -rf src/main/resources/application*.yml
+                    git pull origin main
+                    echo "$DOCKER_COMPOSE" > docker-compose.yml
+                    echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
+                    echo "$APPLICATION_PROPERTIES_PROV" > src/main/resources/application-prov.yml
+                    echo "$APPLICATION_PROPERTIES_TEST" > src/main/resources/application-test.yml
+                    ./gradlew clean build
+                    docker-compose down || true
+                    docker-compose pull
+                    docker-compose up --build
+                    echo "수정된 서버의 배포를 완료하였습니다."
