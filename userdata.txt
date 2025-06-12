@@ -40,5 +40,5 @@ newgrp docker
 # Gradle 권한 부여
 chmod +x ./gradlew
 
-# Git ownership 설정
-git config --global --add safe.directory /home/ec2-user/app
+# 프로젝트 소유자 변경
+sudo chown -R ec2-user:ec2-user /home/ec2-user/CI_CD_Basic
