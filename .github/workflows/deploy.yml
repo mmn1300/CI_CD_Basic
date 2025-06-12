@@ -1,0 +1,10 @@
+name: Github Actions를 활용한 CI/CD 구축
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
