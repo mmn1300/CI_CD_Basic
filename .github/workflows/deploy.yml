@@ -42,6 +42,7 @@ jobs:
                     echo "$APPLICATION_PROPERTIES" > src/main/resources/application.yml
                     echo "$APPLICATION_PROPERTIES_PROV" > src/main/resources/application-prov.yml
                     echo "$APPLICATION_PROPERTIES_TEST" > src/main/resources/application-test.yml
+                    chmod +x ./gradlew
                     ./gradlew clean build
                     docker-compose down || true
                     docker-compose pull
