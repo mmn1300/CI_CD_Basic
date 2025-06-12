@@ -8,3 +8,7 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+
+        steps:
+            - name: Github Actions 테스트하기
+              run: echo "Github Actions 테스트"

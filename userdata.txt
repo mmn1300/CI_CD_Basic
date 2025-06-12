@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# 관리자 권한 부여
+sudo -s
+
+# 스왑 설정 (1기가 확보 -> 권한 부여 -> 스왑 생성 및 실행)
+sudo fallocate -l 1G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+echo '/swapfile swap swap defaults 0 0' | sudo tee -a /etc/fstab
+
+# 자바 및 자바 컴파일러 설치
+sudo dnf update -y
+sudo dnf install java-17-amazon-corretto -y
+sudo dnf install java-17-amazon-corretto-devel -y
+sudo dnf install git -y
+
+# 자바 환경변수 설정
+export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64
+export PATH=$JAVA_HOME/bin:$PATH
+echo 'export JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64' >> ~/.bashrc
+echo 'export PATH=$JAVA_HOME/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
+
+# 도커 설치
+sudo dnf install -y docker
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo usermod -aG docker ec2-user
+sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+newgrp docker
