@@ -47,4 +47,3 @@ jobs:
                     docker-compose down || true
                     docker-compose pull
                     docker-compose up --build
-                    echo "수정된 서버의 배포를 완료하였습니다."
