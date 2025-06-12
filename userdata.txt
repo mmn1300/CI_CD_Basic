@@ -39,3 +39,6 @@ newgrp docker
 
 # Gradle 권한 부여
 chmod +x ./gradlew
+
+# Git ownership 설정
+git config --global --add safe.directory /home/ec2-user/app

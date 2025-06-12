@@ -20,11 +20,6 @@ jobs:
             - name: 코드 체크 아웃
               uses: actions/checkout@v4
 
-            - name: Git ownership 설정
-              run: | 
-                git config --global --add safe.directory "$GITHUB_WORKSPACE"
-                echo "$GITHUB_WORKSPACE"
-
             - name: EC2 인스턴스에 원격 접속 후 새 서버로 교체
               uses: appleboy/ssh-action@v1.0.3
               env:
