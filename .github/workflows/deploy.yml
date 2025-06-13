@@ -30,7 +30,7 @@ jobs:
                 script: |
                     cd /home/ec2-user/CI_CD_Basic
                     rm -rf docker-compose.yml
-                    rm -rf Dockerfile.yml
+                    rm -rf Dockerfile
                     rm -rf src/main/resources/application*.yml
                     git pull origin main
                     echo "$DOCKER_COMPOSE" > docker-compose.yml
@@ -41,4 +41,5 @@ jobs:
                     chmod +x ./gradlew
                     ./gradlew clean build
                     docker-compose down || true
+                    docker-compose pull
                     docker-compose up --build
