@@ -41,5 +41,4 @@ jobs:
                     chmod +x ./gradlew
                     ./gradlew clean build
                     docker-compose down || true
-                    docker-compose pull
                     docker-compose up --build
