@@ -10,13 +10,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: EC2 인스턴스가 실행 중인지 확인
-              run: |
-                  ping -c 1 ${{ secrets.EC2_HOST }} > /dev/null 2>&1 || {
-                    echo "EC2 인스턴스가 실행 중이 아닙니다. 배포를 중단합니다."
-                    exit 0
-                  }
-
             - name: 코드 체크 아웃
               uses: actions/checkout@v4
 
@@ -47,4 +40,3 @@ jobs:
                     docker-compose down || true
                     docker-compose pull
                     docker-compose up --build
-                    
