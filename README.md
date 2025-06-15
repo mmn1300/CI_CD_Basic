@@ -21,6 +21,7 @@
 
 + #### 2025-06-12
   + CI/CD 실습을 위한 Spring서버 Clone 사용 (sping_basic 2025-06-09)
+![간단한 CI/CD 구성도](https://github.com/mmn1300/CI_CD_Basic/blob/main/CI_CD_img/%EA%B0%84%EB%8B%A8%ED%95%9C%20CI%20CD%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90.png)
 
 --- 
 
