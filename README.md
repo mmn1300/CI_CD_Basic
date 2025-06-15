@@ -29,8 +29,3 @@
 ![간단한 CI/CD 구성도](https://github.com/mmn1300/CI_CD_Basic/blob/main/CI_CD_img/%EA%B0%84%EB%8B%A8%ED%95%9C%20CI%20CD%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B3%90.png)
 
 --- 
-
-+ #### 2025-06-13
-  + Github Actions에서 EC2 원격 접속을 통한 CI/CD 파이프라인 구축
-
----
